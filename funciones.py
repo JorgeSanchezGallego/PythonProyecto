@@ -1,3 +1,11 @@
+def usuario():
+    nick_name = input("¿Cual es tu nickname?\n")
+    return nick_name
+
+def ranking():
+    print("Y bien, vamos a ver el ranking!")
+
+
 def mostrar_menu():
     print("Hola! Bienvenid@  al test más random que puedas ver!")
     print("### MENÚ ###")
@@ -68,6 +76,16 @@ def test_futbol():
             print("Incorrecto!")
     return score
 
+def ranking ():
+
+    print("Bienvenido a nuestro top 5!")
+
+    for clave in clasificacion:
+        print(f"{clave}: {clasificacion.get(clave)}")
+
+
+
+clasificacion = {}
 
 preguntas_colegio = {
         1:{

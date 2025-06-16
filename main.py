@@ -1,4 +1,4 @@
-
+from logging import exception
 
 from funciones import mostrar_menu, preguntas_colegio, cargar_test, preguntas_pokemon, test_colegio, test_pokemon, \
     test_futbol, usuario, clasificacion, ranking
@@ -8,12 +8,19 @@ opcion = -1
 while opcion != 3:
     score = 0
 
-    mostrar_menu()
-    opcion = int(input("¿Cúal es tu opción?\n"))
-    nick_name = usuario()
-    print(nick_name)
+    try:
+        mostrar_menu()
+        opcion = int(input("¿Cúal es tu opción?\n"))
+    except Exception as e:
+        print("Por favor, introduce un número válido.")
+        continue
+    if opcion not in [1, 2, 3]:
+        print("Por favor, introduce un índice válido")
+
+
     if opcion == 1:
-        print("Valiente... Y bien, de que quieres el test")
+        nick_name = usuario()
+        print(f"Eres valiente {nick_name}... Y bien, de que quieres el test")
         print("Preguntas del colegio")
         print("Pokemon")
         print("Fútbol")
@@ -45,6 +52,9 @@ while opcion != 3:
 
     elif opcion == 2:
         ranking()
+    else:
+        print("Gracias por jugar!")
+
 
 
 

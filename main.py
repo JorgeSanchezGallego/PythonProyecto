@@ -1,7 +1,7 @@
-from logging import exception
+
 
 from funciones import mostrar_menu, preguntas_colegio, cargar_test, preguntas_pokemon, test_colegio, test_pokemon, \
-    test_futbol, usuario, clasificacion, ranking
+    test_futbol, usuario, clasificacion, ranking, IndiceInvalido, mostrar_resultado, mostrar_test
 
 opcion = -1
 
@@ -11,49 +11,54 @@ while opcion != 3:
     try:
         mostrar_menu()
         opcion = int(input("¿Cúal es tu opción?\n"))
-    except Exception as e:
-        print("Por favor, introduce un número válido.")
+        if opcion not in [1, 2, 3]:
+            raise IndiceInvalido
+    except ValueError:
+        print("Por favor, introduce un número, no una palabra.")
         continue
-    if opcion not in [1, 2, 3]:
-        print("Por favor, introduce un índice válido")
+    except IndiceInvalido:
+        print("Error de indice")
+        continue
 
 
     if opcion == 1:
         nick_name = usuario()
-        print(f"Eres valiente {nick_name}... Y bien, de que quieres el test")
-        print("Preguntas del colegio")
-        print("Pokemon")
-        print("Fútbol")
-        test_elegido = input("¿Por cual te decides?\n")
-        if test_elegido == "Colegio":
+        mostrar_test(nick_name)
+        try:
+            test_elegido = int(input("¿Por cual te decides?\n"))
+            if test_elegido not in [1, 2, 3]:
+                raise IndiceInvalido
+        except ValueError:
+            print("Por favor, introduce un número, no una palabra.")
+            continue
+        except IndiceInvalido:
+            print("Error de índice")
+            continue
+
+        if test_elegido == 1:
             cargar_test(test_elegido)
             calificacion =test_colegio()
 
-        elif test_elegido == "Pokemon":
+        elif test_elegido == 2:
             cargar_test(test_elegido)
             calificacion = test_pokemon()
-        elif test_elegido == "Futbol":
+        elif test_elegido == 3:
             cargar_test(test_elegido)
             calificacion = test_futbol()
+        else:
+            print("Error de índice")
+            continue
 
-        print(f"Tu número total de aciertos es de: {calificacion} sobre 10 preguntas")
-        porcentaje = (calificacion / 10)*100
-        print(f"Tu porcentaje de aciertos es del {porcentaje:.2f}%")
-        if calificacion < 5:
-            print("Vas de máquina y suspendes")
-        elif calificacion > 5 and calificacion< 7:
-            print("Vas bien pero estudia más")
-        elif calificacion > 7:
-            print("Estás a un paso de la matricula de honor! ¡Adelante!")
-        elif calificacion == 10:
-            print("Matricula de honor, ¡enhorabuena!")
+        mostrar_resultado(calificacion)
 
         clasificacion[nick_name] = calificacion
 
     elif opcion == 2:
         ranking()
     else:
-        print("Gracias por jugar!")
+        print("Apagando.")
+
+print("Gracias por jugar!")
 
 
 

@@ -1,9 +1,30 @@
+class IndiceInvalido(Exception):
+    """Excepción personalizada para opciones fuera de rango."""
+    pass
+
+
 def usuario():
     nick_name = input("¿Cual es tu nickname?\n")
     return nick_name
 
-def ranking():
-    print("Y bien, vamos a ver el ranking!")
+def mostrar_test(nickname):
+    print(f"Eres valiente {nickname}... Y bien, de que quieres el test")
+    print("1- Preguntas del colegio")
+    print("2- Pokemon")
+    print("3- Fútbol")
+
+def mostrar_resultado(calificacion):
+    print(f"Tu número total de aciertos es de: {calificacion} sobre 10 preguntas")
+    porcentaje = (calificacion / 10) * 100
+    print(f"Tu porcentaje de aciertos es del {porcentaje:.2f}%")
+    if calificacion < 5:
+        print("Vas de máquina y suspendes")
+    elif 5 <= calificacion < 7:
+        print("Vas bien pero estudia más")
+    elif 7 <= calificacion < 10:
+        print("Estás a un paso de la matricula de honor! ¡Adelante!")
+    elif calificacion == 10:
+        print("Matricula de honor, ¡enhorabuena!")
 
 
 def mostrar_menu():
@@ -15,11 +36,11 @@ def mostrar_menu():
     print("3 - Apagar!")
 
 def cargar_test(opcion):
-    if opcion == "Colegio":
+    if opcion == 1:
         print("Has elegido el test de nivel parbulario! Eres un machote!")
-    elif opcion =="Pokemon":
+    elif opcion == 2:
         print("Wow! Ahora me vas a demostrar tus conocimientos de Pokemon!")
-    elif opcion == "Futbol":
+    elif opcion == 3:
         print("Me lo esperaba, a quien no le gusta el fútbol!")
     else:
         print("Test no encontrado")
@@ -32,7 +53,17 @@ def test_colegio():
             print(datos['pregunta'])
             for indice, valor in enumerate(datos['opciones'], 1):
                 print(f"{indice}. {valor}")
-            respuesta_usuario = int(input("Dime el indice de tu respuesta!\n"))
+            try:
+                respuesta_usuario = int(input("Dime el indice de tu respuesta!\n"))
+                if respuesta_usuario not in [1, 2, 3, 4]:
+                    raise IndiceInvalido
+            except ValueError:
+                print("Por favor, introduce un numero del 1 al 4")
+                break
+            except IndiceInvalido:
+                print("Error de índice")
+                break
+
             respuesta_posicion = datos['opciones'][respuesta_usuario - 1]
             if respuesta_posicion == datos['respuesta_correcta']:
                 print("¡Correcto!")
@@ -50,7 +81,17 @@ def test_pokemon():
         print(datos['pregunta'])
         for indice, valor in enumerate(datos['opciones'], 1):
             print(f"{indice}. {valor}")
-        respuesta_usuario = int(input("Dime el indice de tu respuesta!\n"))
+        try:
+            respuesta_usuario = int(input("Dime el indice de tu respuesta!\n"))
+            if respuesta_usuario not in [1, 2, 3, 4]:
+                raise IndiceInvalido
+        except ValueError:
+            print("Por favor, introduce un numero del 1 al 4")
+            break
+        except IndiceInvalido:
+            print("Error de índice")
+            break
+
         respuesta_posicion = datos['opciones'][respuesta_usuario - 1]
         if respuesta_posicion == datos['respuesta_correcta']:
             print("¡Correcto!")
@@ -67,7 +108,17 @@ def test_futbol():
         print(datos['pregunta'])
         for indice, valor in enumerate(datos['opciones'], 1):
             print(f"{indice}. {valor}")
-        respuesta_usuario = int(input("Dime el indice de tu respuesta!\n"))
+        try:
+            respuesta_usuario = int(input("Dime el indice de tu respuesta!\n"))
+            if respuesta_usuario not in [1, 2, 3, 4]:
+                raise IndiceInvalido
+        except ValueError:
+            print("Por favor, introduce un numero del 1 al 4")
+            break
+        except IndiceInvalido:
+            print("Error de índice")
+            break
+
         respuesta_posicion = datos['opciones'][respuesta_usuario - 1]
         if respuesta_posicion == datos['respuesta_correcta']:
             print("¡Correcto!")
@@ -247,9 +298,7 @@ preguntas_futbol = {
         }
     }
 
-def get_respuesta():
-    respuesta = input("Es tu momento! Elige bien!\n")
-    return respuesta
+
 
 
 

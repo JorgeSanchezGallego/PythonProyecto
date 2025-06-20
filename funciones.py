@@ -1,16 +1,16 @@
 import time
 from colorama import Fore, Style
 
-class IndiceInvalido(Exception):
-    """Excepción personalizada para opciones fuera de rango."""
+class IndiceInvalido(Exception): # Define una clase de excepción personalizada para manejar índices fuera de rango
+
     pass
 
 
-def usuario():
+def usuario(): # Pide al usuario que escriba su nickname
     nick_name = input("¿Cual es tu nickname? 💥\n")
-    return nick_name
+    return nick_name # Devuelve el nickname introducido
 
-def mostrar_test(nickname):
+def mostrar_test(nickname): # Muestra las opciones de test disponibles
     print(f"Eres valiente {nickname}... Y bien, de que quieres el test  😄")
     time.sleep(0.5)
     print("1- Preguntas del colegio 😱")
@@ -19,14 +19,14 @@ def mostrar_test(nickname):
     time.sleep(0.5)
     print("3- Fútbol 🤪")
 
-def mostrar_resultado(calificacion):
+def mostrar_resultado(calificacion): # Muestra los resultados del test con mensajes según el rendimiento
     time.sleep(0.5)
     print(f"Tu número total de aciertos es de: {calificacion} sobre 10 preguntas ✅")
-    porcentaje = (calificacion / 10) * 100
+    porcentaje = (calificacion / 10) * 100 # Calcula el porcentaje de aciertos
     time.sleep(0.5)
     print(f"Tu porcentaje de aciertos es del {porcentaje:.2f}% 💥")
     time.sleep(0.5)
-    if calificacion < 5:
+    if calificacion < 5: # Mensajes personalizados según la puntuación
         print(Fore.RED +"Vas de máquina y suspendes ⛔", Style.RESET_ALL)
     elif 5 <= calificacion < 7:
         print(Fore.YELLOW +"Vas bien pero estudia más 🉑", Style.RESET_ALL)
@@ -36,7 +36,7 @@ def mostrar_resultado(calificacion):
         print("Matricula de honor, ¡enhorabuena! 💯")
 
 
-def mostrar_menu():
+def mostrar_menu(): # Muestra el menú principal del programa
     print(Fore.BLUE + "Hola! Bienvenid@  al test más random que puedas ver! ✨")
     time.sleep(0.3)
     print("🎈🎈🎈 MENÚ 🎈🎈🎈")
@@ -49,7 +49,7 @@ def mostrar_menu():
     time.sleep(0.3)
     print("3️⃣ - Apagar!")
 
-def cargar_test(opcion):
+def cargar_test(opcion): # Muestra un mensaje dependiendo del test seleccionado
     if opcion == 1:
         print("🙄 Has elegido el test de nivel parbulario! Eres un machote! 🤐")
     elif opcion == 2:
@@ -59,102 +59,102 @@ def cargar_test(opcion):
     else:
         print(Fore.RED +"❌ Test no encontrado ❌", Style.RESET_ALL)
 
-def test_colegio():
-        score = 0
+def test_colegio(): # Función para hacer el test de preguntas del colegio
+        score = 0 # Contador de respuestas correctas
         print(Fore.BLUE+"Vamos con las preguntas❗", Style.RESET_ALL)
         time.sleep(0.5)
-        for numero, datos in preguntas_colegio.items():
-            print(f"Pregunta número {numero} 💫")
-            print(datos['pregunta'])
-            for indice, valor in enumerate(datos['opciones'], 1):
+        for numero, datos in preguntas_colegio.items(): # Itera sobre las preguntas del diccionario
+            print(f"Pregunta número {numero} 💫") # Muestra el número de pregunta
+            print(datos['pregunta']) # Muestra el texto de la pregunta
+            for indice, valor in enumerate(datos['opciones'], 1): # Muestra las opciones enumeradas desde 1
                 time.sleep(0.5)
-                print(f"{indice}. {valor}")
+                print(f"{indice}. {valor}") # Imprime cada opción
             try:
                 time.sleep(0.5)
                 respuesta_usuario = int(input("Dime el indice de tu respuesta! 📵\n"))
-                if respuesta_usuario not in [1, 2, 3, 4]:
-                    raise IndiceInvalido
-            except ValueError:
+                if respuesta_usuario not in [1, 2, 3, 4]: # Verifica si el índice es válido
+                    raise IndiceInvalido # Lanza excepción personalizada si no es válido
+            except ValueError: # Captura si el input no es un número
                 print(Fore.RED +" ❌ Por favor, introduce un numero del 1 al 4. ❌", Style.RESET_ALL)
                 break
             except IndiceInvalido:
                 print(Fore.RED +"❌ Error de índice. ❌", Style.RESET_ALL)
                 break
 
-            respuesta_posicion = datos['opciones'][respuesta_usuario - 1]
-            if respuesta_posicion == datos['respuesta_correcta']:
+            respuesta_posicion = datos['opciones'][respuesta_usuario - 1]# Obtiene el texto de la respuesta elegida
+            if respuesta_posicion == datos['respuesta_correcta']: # Compara con la correcta
                 print(Fore.GREEN +"✅ ¡Correcto! ✅", Style.RESET_ALL)
-                score += 1
+                score += 1 # Aumenta el marcador
                 time.sleep(0.5)
             else:
                 print(Fore.RED +"❌ ¡Incorrecto! ❌", Style.RESET_ALL)
                 time.sleep(0.5)
-        return score
+        return score  # Devuelve el total de respuestas correctas
 
 
 def test_pokemon():
-    score = 0
+    score = 0 # Contador de respuestas correctas
     print(Fore.BLUE+"Vamos con las preguntas❗", Style.RESET_ALL)
     time.sleep(0.5)
-    for numero, datos in preguntas_pokemon.items():
-        print(f"Pregunta número {numero} 💫")
-        print(datos['pregunta'])
-        for indice, valor in enumerate(datos['opciones'], 1):
+    for numero, datos in preguntas_pokemon.items(): # Itera sobre las preguntas del diccionario
+        print(f"Pregunta número {numero} 💫") # Muestra el número de pregunta
+        print(datos['pregunta']) # Muestra el texto de la pregunta
+        for indice, valor in enumerate(datos['opciones'], 1): # Muestra las opciones enumeradas desde 1
             time.sleep(0.5)
-            print(f"{indice}. {valor}")
+            print(f"{indice}. {valor}") # Imprime cada opción
         try:
             time.sleep(0.5)
             respuesta_usuario = int(input("Dime el indice de tu respuesta! 📵\n"))
-            if respuesta_usuario not in [1, 2, 3, 4]:
-                raise IndiceInvalido
-        except ValueError:
+            if respuesta_usuario not in [1, 2, 3, 4]: # Verifica si el índice es válido
+                raise IndiceInvalido # Lanza excepción personalizada si no es válido
+        except ValueError: # Captura si el input no es un número
             print(Fore.RED +"❌ Por favor, introduce un numero del 1 al 4 ❌", Style.RESET_ALL)
             break
         except IndiceInvalido:
             print(Fore.RED +"❌ Error de índice ❌", Style.RESET_ALL)
             break
 
-        respuesta_posicion = datos['opciones'][respuesta_usuario - 1]
-        if respuesta_posicion == datos['respuesta_correcta']:
+        respuesta_posicion = datos['opciones'][respuesta_usuario - 1] # Obtiene el texto de la respuesta elegida
+        if respuesta_posicion == datos['respuesta_correcta']: # Compara con la correcta
             time.sleep(0.5)
             print(Fore.GREEN +"✅ ¡Correcto! ✅", Style.RESET_ALL)
-            score += 1
+            score += 1 # Aumenta el marcador
         else:
             time.sleep(0.5)
             print(Fore.RED +"❌ ¡Incorrecto! ❌", Style.RESET_ALL)
-    return score
+    return score  # Devuelve el total de respuestas correctas
 
 def test_futbol():
-    score = 0
+    score = 0 # Contador de respuestas correctas
     print(Fore.BLUE+"Vamos con las preguntas❗", Style.RESET_ALL)
     time.sleep(0.5)
-    for numero, datos in preguntas_futbol.items():
-        print(f"Pregunta número {numero} 💫")
-        print(datos['pregunta'])
-        for indice, valor in enumerate(datos['opciones'], 1):
+    for numero, datos in preguntas_futbol.items(): # Itera sobre las preguntas del diccionario
+        print(f"Pregunta número {numero} 💫") # Muestra el número de pregunta
+        print(datos['pregunta']) # Muestra el texto de la pregunta
+        for indice, valor in enumerate(datos['opciones'], 1): # Muestra las opciones enumeradas desde 1
             time.sleep(0.5)
-            print(f"{indice}. {valor}")
+            print(f"{indice}. {valor}") # Imprime cada opción
         try:
             time.sleep(0.5)
             respuesta_usuario = int(input("Dime el indice de tu respuesta! 📵\n"))
-            if respuesta_usuario not in [1, 2, 3, 4]:
-                raise IndiceInvalido
-        except ValueError:
+            if respuesta_usuario not in [1, 2, 3, 4]: # Verifica si el índice es válido
+                raise IndiceInvalido # Lanza excepción personalizada si no es válido
+        except ValueError: # Captura si el input no es un número
             print(Fore.RED +"❌ Por favor, introduce un numero del 1 al 4 ❌", Style.RESET_ALL)
             break
         except IndiceInvalido:
             print(Fore.RED +"❌ Error de índice ❌", Style.RESET_ALL)
             break
 
-        respuesta_posicion = datos['opciones'][respuesta_usuario - 1]
-        if respuesta_posicion == datos['respuesta_correcta']:
+        respuesta_posicion = datos['opciones'][respuesta_usuario - 1] # Obtiene el texto de la respuesta elegida
+        if respuesta_posicion == datos['respuesta_correcta']: # Compara con la correcta
             time.sleep(0.5)
             print(Fore.GREEN +"✅ ¡Correcto! ✅", Style.RESET_ALL)
-            score += 1
+            score += 1 # Aumenta el marcador
         else:
             time.sleep(0.5)
             print(Fore.RED +"❌ ¡Incorrecto! ❌", Style.RESET_ALL)
-    return score
+    return score  # Devuelve el total de respuestas correctas
 
 def ranking ():
 

@@ -1,5 +1,5 @@
 
-
+from colorama import Fore, Style
 from funciones import mostrar_menu, preguntas_colegio, cargar_test, preguntas_pokemon, test_colegio, test_pokemon, \
     test_futbol, usuario, clasificacion, ranking, IndiceInvalido, mostrar_resultado, mostrar_test
 
@@ -10,14 +10,14 @@ while opcion != 3:
 
     try:
         mostrar_menu()
-        opcion = int(input("¿Cúal es tu opción?\n"))
+        opcion = int(input("¿Cúal es tu opción❓\n"))
         if opcion not in [1, 2, 3]:
             raise IndiceInvalido
     except ValueError:
-        print("Por favor, introduce un número, no una palabra.")
+        print(Fore.RED + "❌ Por favor, introduce un número, no una palabra. ❌", Style.RESET_ALL)
         continue
     except IndiceInvalido:
-        print("Error de indice")
+        print(Fore.RED +"❌ Error de índice. ❌", Style.RESET_ALL)
         continue
 
 
@@ -25,14 +25,14 @@ while opcion != 3:
         nick_name = usuario()
         mostrar_test(nick_name)
         try:
-            test_elegido = int(input("¿Por cual te decides?\n"))
+            test_elegido = int(input("¿Por cual te decides?💨\n"))
             if test_elegido not in [1, 2, 3]:
                 raise IndiceInvalido
         except ValueError:
-            print("Por favor, introduce un número, no una palabra.")
+            print(Fore.RED +"❌ Por favor, introduce un número, no una palabra. ❌", Style.RESET_ALL)
             continue
         except IndiceInvalido:
-            print("Error de índice")
+            print(Fore.RED +"❌ Error de índice. ❌", Style.RESET_ALL)
             continue
 
         if test_elegido == 1:
@@ -46,7 +46,7 @@ while opcion != 3:
             cargar_test(test_elegido)
             calificacion = test_futbol()
         else:
-            print("Error de índice")
+            print(Fore.RED +"Error de índice", Style.RESET_ALL)
             continue
 
         mostrar_resultado(calificacion)
@@ -56,9 +56,9 @@ while opcion != 3:
     elif opcion == 2:
         ranking()
     else:
-        print("Apagando.")
+        print(Fore.RED +"Apagando. 🔴🔴🔴", Style.RESET_ALL)
 
-print("Gracias por jugar!")
+print("Gracias por jugar! 👋")
 
 
 

@@ -1,138 +1,168 @@
+import time
+from colorama import Fore, Style
+
 class IndiceInvalido(Exception):
     """Excepción personalizada para opciones fuera de rango."""
     pass
 
 
 def usuario():
-    nick_name = input("¿Cual es tu nickname?\n")
+    nick_name = input("¿Cual es tu nickname? 💥\n")
     return nick_name
 
 def mostrar_test(nickname):
-    print(f"Eres valiente {nickname}... Y bien, de que quieres el test")
-    print("1- Preguntas del colegio")
-    print("2- Pokemon")
-    print("3- Fútbol")
+    print(f"Eres valiente {nickname}... Y bien, de que quieres el test  😄")
+    time.sleep(0.5)
+    print("1- Preguntas del colegio 😱")
+    time.sleep(0.5)
+    print("2- Pokemon 🤓")
+    time.sleep(0.5)
+    print("3- Fútbol 🤪")
 
 def mostrar_resultado(calificacion):
-    print(f"Tu número total de aciertos es de: {calificacion} sobre 10 preguntas")
+    time.sleep(0.5)
+    print(f"Tu número total de aciertos es de: {calificacion} sobre 10 preguntas ✅")
     porcentaje = (calificacion / 10) * 100
-    print(f"Tu porcentaje de aciertos es del {porcentaje:.2f}%")
+    time.sleep(0.5)
+    print(f"Tu porcentaje de aciertos es del {porcentaje:.2f}% 💥")
+    time.sleep(0.5)
     if calificacion < 5:
-        print("Vas de máquina y suspendes")
+        print(Fore.RED +"Vas de máquina y suspendes ⛔", Style.RESET_ALL)
     elif 5 <= calificacion < 7:
-        print("Vas bien pero estudia más")
+        print(Fore.YELLOW +"Vas bien pero estudia más 🉑", Style.RESET_ALL)
     elif 7 <= calificacion < 10:
-        print("Estás a un paso de la matricula de honor! ¡Adelante!")
+        print("Estás a un paso de la matricula de honor! ¡Adelante! ✅")
     elif calificacion == 10:
-        print("Matricula de honor, ¡enhorabuena!")
+        print("Matricula de honor, ¡enhorabuena! 💯")
 
 
 def mostrar_menu():
-    print("Hola! Bienvenid@  al test más random que puedas ver!")
-    print("### MENÚ ###")
-    print("Marca un número para realizar esa opción")
-    print("1 - Empezar test random!")
-    print("2 - Ranking")
-    print("3 - Apagar!")
+    print(Fore.BLUE + "Hola! Bienvenid@  al test más random que puedas ver! ✨")
+    time.sleep(0.3)
+    print("🎈🎈🎈 MENÚ 🎈🎈🎈")
+    time.sleep(0.3)
+    print("Marca un número para realizar esa opción ✅" ,Style.RESET_ALL)
+    time.sleep(0.3)
+    print("1️ - Test random!")
+    time.sleep(0.3)
+    print("2️⃣ - Ranking!")
+    time.sleep(0.3)
+    print("3️⃣ - Apagar!")
 
 def cargar_test(opcion):
     if opcion == 1:
-        print("Has elegido el test de nivel parbulario! Eres un machote!")
+        print("🙄 Has elegido el test de nivel parbulario! Eres un machote! 🤐")
     elif opcion == 2:
-        print("Wow! Ahora me vas a demostrar tus conocimientos de Pokemon!")
+        print("👻 Wow! Ahora me vas a demostrar tus conocimientos de Pokemon! 🤯")
     elif opcion == 3:
-        print("Me lo esperaba, a quien no le gusta el fútbol!")
+        print("⚽ Me lo esperaba, a quien no le gusta el fútbol! 😎")
     else:
-        print("Test no encontrado")
+        print(Fore.RED +"❌ Test no encontrado ❌", Style.RESET_ALL)
 
 def test_colegio():
         score = 0
-        print("Vamos con las preguntas!")
+        print(Fore.BLUE+"Vamos con las preguntas❗", Style.RESET_ALL)
+        time.sleep(0.5)
         for numero, datos in preguntas_colegio.items():
-            print(f"Pregunta número {numero}")
+            print(f"Pregunta número {numero} 💫")
             print(datos['pregunta'])
             for indice, valor in enumerate(datos['opciones'], 1):
+                time.sleep(0.5)
                 print(f"{indice}. {valor}")
             try:
-                respuesta_usuario = int(input("Dime el indice de tu respuesta!\n"))
+                time.sleep(0.5)
+                respuesta_usuario = int(input("Dime el indice de tu respuesta! 📵\n"))
                 if respuesta_usuario not in [1, 2, 3, 4]:
                     raise IndiceInvalido
             except ValueError:
-                print("Por favor, introduce un numero del 1 al 4")
+                print(Fore.RED +" ❌ Por favor, introduce un numero del 1 al 4. ❌", Style.RESET_ALL)
                 break
             except IndiceInvalido:
-                print("Error de índice")
+                print(Fore.RED +"❌ Error de índice. ❌", Style.RESET_ALL)
                 break
 
             respuesta_posicion = datos['opciones'][respuesta_usuario - 1]
             if respuesta_posicion == datos['respuesta_correcta']:
-                print("¡Correcto!")
+                print(Fore.GREEN +"✅ ¡Correcto! ✅", Style.RESET_ALL)
                 score += 1
+                time.sleep(0.5)
             else:
-                print("Incorrecto!")
+                print(Fore.RED +"❌ ¡Incorrecto! ❌", Style.RESET_ALL)
+                time.sleep(0.5)
         return score
 
 
 def test_pokemon():
     score = 0
-    print("Vamos con las preguntas!")
+    print(Fore.BLUE+"Vamos con las preguntas❗", Style.RESET_ALL)
+    time.sleep(0.5)
     for numero, datos in preguntas_pokemon.items():
-        print(f"Pregunta número {numero}")
+        print(f"Pregunta número {numero} 💫")
         print(datos['pregunta'])
         for indice, valor in enumerate(datos['opciones'], 1):
+            time.sleep(0.5)
             print(f"{indice}. {valor}")
         try:
-            respuesta_usuario = int(input("Dime el indice de tu respuesta!\n"))
+            time.sleep(0.5)
+            respuesta_usuario = int(input("Dime el indice de tu respuesta! 📵\n"))
             if respuesta_usuario not in [1, 2, 3, 4]:
                 raise IndiceInvalido
         except ValueError:
-            print("Por favor, introduce un numero del 1 al 4")
+            print(Fore.RED +"❌ Por favor, introduce un numero del 1 al 4 ❌", Style.RESET_ALL)
             break
         except IndiceInvalido:
-            print("Error de índice")
+            print(Fore.RED +"❌ Error de índice ❌", Style.RESET_ALL)
             break
 
         respuesta_posicion = datos['opciones'][respuesta_usuario - 1]
         if respuesta_posicion == datos['respuesta_correcta']:
-            print("¡Correcto!")
+            time.sleep(0.5)
+            print(Fore.GREEN +"✅ ¡Correcto! ✅", Style.RESET_ALL)
             score += 1
         else:
-            print("Incorrecto!")
+            time.sleep(0.5)
+            print(Fore.RED +"❌ ¡Incorrecto! ❌", Style.RESET_ALL)
     return score
 
 def test_futbol():
     score = 0
-    print("Vamos con las preguntas!")
+    print(Fore.BLUE+"Vamos con las preguntas❗", Style.RESET_ALL)
+    time.sleep(0.5)
     for numero, datos in preguntas_futbol.items():
-        print(f"Pregunta número {numero}")
+        print(f"Pregunta número {numero} 💫")
         print(datos['pregunta'])
         for indice, valor in enumerate(datos['opciones'], 1):
+            time.sleep(0.5)
             print(f"{indice}. {valor}")
         try:
-            respuesta_usuario = int(input("Dime el indice de tu respuesta!\n"))
+            time.sleep(0.5)
+            respuesta_usuario = int(input("Dime el indice de tu respuesta! 📵\n"))
             if respuesta_usuario not in [1, 2, 3, 4]:
                 raise IndiceInvalido
         except ValueError:
-            print("Por favor, introduce un numero del 1 al 4")
+            print(Fore.RED +"❌ Por favor, introduce un numero del 1 al 4 ❌", Style.RESET_ALL)
             break
         except IndiceInvalido:
-            print("Error de índice")
+            print(Fore.RED +"❌ Error de índice ❌", Style.RESET_ALL)
             break
 
         respuesta_posicion = datos['opciones'][respuesta_usuario - 1]
         if respuesta_posicion == datos['respuesta_correcta']:
-            print("¡Correcto!")
+            time.sleep(0.5)
+            print(Fore.GREEN +"✅ ¡Correcto! ✅", Style.RESET_ALL)
             score += 1
         else:
-            print("Incorrecto!")
+            time.sleep(0.5)
+            print(Fore.RED +"❌ ¡Incorrecto! ❌", Style.RESET_ALL)
     return score
 
 def ranking ():
 
-    print("Bienvenido a nuestro top 5!")
+    print(Fore.MAGENTA+"Bienvenido a nuestro top 5! 🏆", Style.RESET_ALL)
 
     for clave in clasificacion:
-        print(f"{clave}: {clasificacion.get(clave)}")
+        time.sleep(0.5)
+        print(Fore.YELLOW + f"{clave}: {clasificacion.get(clave)} aciertos!✅", Style.RESET_ALL)
 
 
 
